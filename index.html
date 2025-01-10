@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Declaração Especial</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 1s;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .heart-button {
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+        }
+
+        .heart-button:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .new-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+            color: #333;
+            padding: 20px;
+        }
+
+        .new-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heart-button-secondary {
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+            margin-top: 20px;
+        }
+
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .photo-container img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            margin: 0 10px;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 1s ease-in-out;
+        }
+
+        .carousel-arrow {
+            font-size: 2rem;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .carousel-arrow.left {
+            left: 10px;
+        }
+
+        .carousel-arrow.right {
+            right: 10px;
+        }
+
+        .small-text {
+            font-size: 0.8rem; /* Texto pequeno */
+        }
+
+        @keyframes autoSlide {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(-200%);
+            }
+            75% {
+                transform: translateX(-300%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .auto-slide {
+            animation: autoSlide 15s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <h1 class="title">Oi cabeçuda kkk</h1>
+        <p class="subtitle">clica nesse coração, não vai demora</p>
+        <button id="revealButton" class="heart-button">❤</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealButton = document.getElementById('revealButton');
+            const mainContainer = document.getElementById('mainContainer');
+
+            // Clique no botão do coração da primeira página
+            revealButton.addEventListener('click', () => {
+                mainContainer.style.transform = 'rotateY(90deg)';
+                setTimeout(() => {
+                    mainContainer.innerHTML = `
+                        <div class="new-container" id="newContainer">
+                            <p id="typedText"></p>
+                            <button id="secondaryButton" class="heart-button-secondary" disabled>❤</button>
+                        </div>
+                    `;
+                    mainContainer.style.transform = 'rotateY(0deg)';
+                    startTyping();
+                }, 1000);
+            });
+
+            // Função de digitação do texto
+            function startTyping() {
+                const text = "Eu sei que você anda mais ocupada por tá começando agora na monitoria e tá correndo atrás de aprender tudo logo, e eu admiro tanto isso em você eu realmente tô com saudade e sei que a gente vai se ver, não quero que pense que quando tava chamando você de amor ou momo ou outra coisa não foi intenção de deixar você com raiva, acaba que é costume só me desculpa, tá vendo essas fotos que apareceram enquanto você lia isso aqui? é pra te mostrar que sou doido por você e se quiser eu vou ser o seu gay pra sempre, não sei como tá no trabalho com várias pessoas novas que entraram etc mas não esquece que te amo, eu sou seu e quero que seja minha, posso ser seu gay pra sempre?! kkk olha desculpa tudo isso mas tem mais porque quando faço essas coisas você termina de ler muito rápido. Aperta no coração ai vai";
+                const typedText = document.getElementById('typedText');
+                let index = 0;
+                function type() {
+                    if (index < text.length) {
+                        typedText.innerHTML += text.charAt(index);
+                        index++;
+                        setTimeout(type, 50);
+                    } else {
+                        enableButton();
+                    }
+                }
+                type();
+            }
+
+            // Função para habilitar o botão quando o texto for totalmente digitado
+            function enableButton() {
+                const secondaryButton = document.getElementById('secondaryButton');
+                secondaryButton.disabled = false; // Habilita o botão
+                secondaryButton.innerHTML = "❤"; // Deixa o coração mesmo
+            }
+
+            // Clique no botão do coração da segunda página
+            document.body.addEventListener('click', (event) => {
+                if (event.target.id === 'secondaryButton') {
+                    mainContainer.style.transform = 'rotateY(90deg)';
+                    setTimeout(() => {
+                        mainContainer.innerHTML = `
+                            <div class="new-container">
+                                <p class="small-text" id="smallText">Na página anterior não apareceu as imagens né? kkkkk deu um pequeno probleminha mas elas estão aqui:</p>
+                                <button id="showImagesButton" class="heart-button-secondary">❤</button>
+                            </div>
+                        `;
+                        mainContainer.style.transform = 'rotateY(0deg)';
+                    }, 1000);
+                }
+            });
+
+            // Clique no botão da página 3 para mostrar as imagens
+            document.body.addEventListener('click', (event) => {
+                if (event.target.id === 'showImagesButton') {
+                    const showImagesButton = event.target;
+                    showImagesButton.disabled = true;
+                    showImagesButton.innerHTML = 'Mostrando imagens...';
+                    showImages();
+                }
+            });
+
+            // Função para mostrar as imagens dentro do mesmo quadrado
+            function showImages() {
+                const photoContainer = document.createElement('div');
+                photoContainer.classList.add('photo-container');
+                const smallTextContainer = document.getElementById('smallText').parentNode;
+                smallTextContainer.appendChild(photoContainer);
+
+                const photoPaths = [
+                    'fotos/image1.png',
+                    'fotos/image2.png',
+                    'fotos/image3.png',
+                    'fotos/image4.png',
+                    'fotos/image5.png'
+                ];
+
+                // Criar o carrossel com as imagens
+                const carousel = document.createElement('div');
+                carousel.classList.add('carousel', 'auto-slide'); // Adiciona a animação de carrossel automático
+                photoContainer.appendChild(carousel);
+
+                photoPaths.forEach((path) => {
+                    const img = document.createElement('img');
+                    img.src = path;
+                    img.style.opacity = '1'; // Tornar a imagem visível
+                    carousel.appendChild(img);
+                });
+
+                // Adicionando as setas para navegar entre as imagens
+                const leftArrow = document.createElement('span');
+                leftArrow.innerHTML = '←';
+                leftArrow.classList.add('carousel-arrow', 'left');
+                photoContainer.appendChild(leftArrow);
+
+                const rightArrow = document.createElement('span');
+                rightArrow.innerHTML = '→';
+                rightArrow.classList.add('carousel-arrow', 'right');
+                photoContainer.appendChild(rightArrow);
+
+                // Função para mover o carrossel para a esquerda
+                leftArrow.addEventListener('click', () => {
+                    carousel.style.transition = 'transform 1s ease-in-out';
+                    carousel.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        carousel.insertBefore(carousel.lastElementChild, carousel.firstElementChild);
+                        carousel.style.transition = 'none';
+                        carousel.style.transform = 'translateX(0)';
+                    }, 1000);
+                });
+
+                // Função para mover o carrossel para a direita
+                rightArrow.addEventListener('click', () => {
+                    carousel.style.transition = 'transform 1s ease-in-out';
+                    carousel.style.transform = 'translateX(-100%)';
+                    setTimeout(() => {
+                        carousel.appendChild(carousel.firstElementChild);
+                        carousel.style.transition = 'none';
+                        carousel.style.transform = 'translateX(0)';
+                    }, 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
